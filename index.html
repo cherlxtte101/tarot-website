@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ทำนายไพ่ทาโรต์แบบอียิปต์</title>
+  <style>
+    body {
+      background-color: #1a1200;
+      color: #ffd700;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      font-family: "Papyrus", fantasy;
+    }
+
+    select, button {
+      font-size: 1em;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #d4af37;
+      color: black;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    select:hover, button:hover {
+      background-color: #f0c94d;
+    }
+
+    .card-result {
+      margin-top: 30px;
+      font-size: 1.3em;
+      background-color: #2d1f00;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #ffd700;
+      display: inline-block;
+      max-width: 500px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔮 ทำนายดวงแบบอียิปต์ 🔮</h1>
+  <p>เลือกหมวดหมู่ที่ต้องการดูดวง:</p>
+
+  <select id="category">
+    <option value="love">💗 ความรัก</option>
+    <option value="money">💰 การเงิน</option>
+    <option value="health">💉 สุขภาพ</option>
+  </select>
+
+  <br>
+  <button onclick="drawCard()">สุ่มไพ่ 1 ใบ</button>
+
+  <div class="card-result" id="cardResult"></div>
+
+  <script>
+    const tarotDeck = [
+      {
+        name: "The Sun",
+        meanings: {
+          love: "ความสัมพันธ์สดใส มีโอกาสพบรักแท้ หรือพัฒนาไปอีกขั้น",
+          money: "การเงินรุ่งเรือง รายได้เข้ามาหลายทาง",
+          health: "สุขภาพแข็งแรง มีพลังชีวิตเต็มเปี่ยม"
+        }
+      },
+      {
+        name: "The Tower",
+        meanings: {
+          love: "อาจมีการเปลี่ยนแปลงกระทันหันในความสัมพันธ์ ต้องระวังคำพูด",
+          money: "ระวังการสูญเสียเงินก้อนใหญ่ หรือการตัดสินใจพลาด",
+          health: "มีเหตุการณ์ไม่คาดฝันเกี่ยวกับสุขภาพ ควรหมั่นตรวจร่างกาย"
+        }
+      },
+      {
+        name: "The Lovers",
+        meanings: {
+          love: "พบรักใหม่ หรือเลือกเส้นทางหัวใจที่สำคัญ",
+          money: "อาจมีรายได้จากคู่รัก หรือหุ้นส่วน",
+          health: "สุขภาพใจดีขึ้น รู้สึกอบอุ่นและมั่นคง"
+        }
+      },
+      {
+        name: "Death",
+        meanings: {
+          love: "ความรักที่ถึงจุดเปลี่ยน อาจจบเพื่อเริ่มต้นใหม่",
+          money: "ต้องเปลี่ยนวิธีหาเงิน หรือลงทุนใหม่",
+          health: "ถึงเวลาปรับเปลี่ยนพฤติกรรมเพื่อสุขภาพใหม่"
+        }
+      }
+    ];
+
+    function drawCard() {
+      const category = document.getElementById("category").value;
+      const randomCard = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
+
+      const result = `
+        <strong>🃏 ไพ่: ${randomCard.name}</strong><br><br>
+        <em>คำทำนาย (${categoryText(category)}):</em><br>
+        ${randomCard.meanings[category]}
+      `;
+
+      document.getElementById("cardResult").innerHTML = result;
+    }
+
+    function categoryText(cat) {
+      switch (cat) {
+        case "love": return "ความรัก";
+        case "money": return "การเงิน";
+        case "health": return "สุขภาพ";
+      }
+    }
+  </script>
+</body>
+</html>
